@@ -4,7 +4,8 @@ const teamData = [];
 let playerArr = [],
    positionArr = [],
    jerseyArr = [],
-   teamColors = [];
+   teamColors = [],
+   teams = [];
 listOfLis = [];
 let containerLists;
 userTeam;
@@ -31,6 +32,21 @@ function loadData() {
       })
 }
 
+// runs when user clicks submit if multiple teams found
+document.querySelector('.selButton').onclick = function() {
+   let radios = document.querySelectorAll('.selection input');
+   for (var radio of radios) {
+      if (radio.checked) {
+         for (let i = 0; i < teams.length; i++) {
+            if (teams[i].name === radio.value) {
+               getRoster(teams[i]);
+               break;
+            }
+         }
+      }
+   }
+}
+
 function setColorsArr() {
    teamColors = [[1, 'rgb(206, 17, 38)', 'rgb(0, 0, 0)', 'rgb(255, 255, 255)'],
    [2, 'rgb(0,83,155)', 'rgb(244, 125, 48)', 'rgb(255, 255, 255)'],
@@ -54,7 +70,7 @@ function setColorsArr() {
    [21, 'rgb(111, 38, 61)', 'rgb(35, 97, 146)', 'rgb(255, 255, 255)'],
    [22, 'rgb(4, 30, 66)', 'rgb(252, 76, 0)', 'rgb(255, 255, 255)'],
    [23, 'rgb(0, 32, 91)', 'rgb(4, 28, 44)', 'rgb(255, 255, 255)'],
-   [24, 'rgb(0, 32, 91)', 'rgb(4, 28, 44)', 'rgb(255, 255, 255)'],
+   [24, 'rgb(252, 76, 2)', 'rgb(0, 0, 0)', 'rgb(255, 255, 255)'],
    [23, 'rgb(252, 76, 2)', 'rgb(0, 0, 0)', 'rgb(255, 255, 255)'],
    [24, 'rgb(252, 76, 2)', 'rgb(0, 0, 0)', 'rgb(255, 255, 255)'],
    [25, 'rgb(0, 104, 71)', 'rgb(143, 143, 140)', 'rgb(255, 255, 255)'],
@@ -67,22 +83,64 @@ function setColorsArr() {
    [54, 'rgb(185,151,91)', 'rgb(51,63,72)', 'rgb(255, 255, 255)'],
    [55, 'rgb(0, 22, 40)', 'rgb(233, 7, 43)', 'rgb(153, 217, 217)'],]
 }
-//function to get API and store team info
+
 function getTeam() {
+   
 
    //finds individual team data for entered team
    userTeam = (document.querySelector('#userTeam').value).toLowerCase();
-   if (userTeam === "") {
+   if (userTeam === "" || userTeam.length === 1) {
       alert('Please enter NHL team');
-   } else if (getSelectedTeamData(userTeam) == undefined) {
-      alert("No team found. Enter another team");
    } else {
-      getRoster(getSelectedTeamData(userTeam))
+      let team = getSelectedTeamData(userTeam);
+      if (team.length === 0) {
+         alert("No team found. Enter another team");
+      } else if (team.length === 1) {
+         console.log(team[0].id);
+         getRoster(team[0]);
+      } else {
+         removeRoster();
+         document.querySelector('.infoContainer').classList.add('hidden');
+         document.querySelector('.container').classList.remove('hidden')
+      }
    }
 }
 
 function getSelectedTeamData(teamName) {
-   return teamData.find(t => t.name.toLowerCase().includes(teamName));
+   teams = [];
+   let form = document.querySelector('.selection');
+   let radioButtons = document.querySelectorAll('.selection input');
+   let labels = document.querySelectorAll('.selection label');
+   let breaks = document.querySelectorAll('.selection br');
+   radioButtons.forEach(box => form.removeChild(box));
+   labels.forEach(label => form.removeChild(label));
+   breaks.forEach(br => form.removeChild(br));
+
+   teamData.find(t => {
+      if (t.name.toLowerCase().includes(teamName)) {
+         teams.push(t);
+
+
+         let radioBox = document.createElement('input');
+         radioBox.name = 'team';
+         radioBox.type = 'radio';
+         radioBox.id = t.name;
+         radioBox.value = t.name;
+
+         let label = document.createElement('label');
+         label.htmlFor = t.name;
+         let description = document.createTextNode(t.name);
+         label.appendChild(description);
+
+         let newLine = document.createElement('br');
+
+         form.appendChild(radioBox);
+         form.appendChild(label);
+         form.appendChild(newLine);
+      }
+   });
+   console.log(teams)
+   return teams;
 }
 
 function getRoster(teamObj) {
@@ -101,25 +159,14 @@ function displayInfo(teamObj) {
    clearPage();
 
    containerLists = document.querySelectorAll('.holderList');
-   let listElements;
 
    document.querySelector('#team').innerHTML = teamObj.name;
    document.querySelector('#conference').innerHTML = `${teamObj.conference} conference`;
    document.querySelector('#division').innerHTML = `${teamObj.division} division`;
 
-   let nameList = document.getElementById('playerNames');
-   let positionList = document.getElementById('playerPositions');
-   let jerseyList = document.getElementById('jerseyNumbers');
+   removeRoster();
 
-   //removes old team li's from DOM and adds hidden class to lists
-   listElements = document.querySelectorAll('#playerNames li');
-   listElements.forEach(player => nameList.removeChild(player));
-   listElements = document.querySelectorAll('#playerPositions li');
-   listElements.forEach(position => positionList.removeChild(position));
-   listElements = document.querySelectorAll('#jerseyNumbers li');
-   listElements.forEach(number => jerseyList.removeChild(number));
    containerLists.forEach((element) => element.classList.remove('hidden'));
-
    //storing every player and position from team into appropriate arrays
    teamRoster = teamObj.roster;
    teamRoster.forEach(player => {
@@ -128,7 +175,12 @@ function displayInfo(teamObj) {
       jerseyArr.push(player.jerseyNumber)
    });
 
+   let nameList = document.getElementById('playerNames');
+   let positionList = document.getElementById('playerPositions');
+   let jerseyList = document.getElementById('jerseyNumbers');
+
    //puts each element of the arrays into an li for the appropriate list
+   document.querySelector('.infoContainer').classList.remove('hidden');
    fillLists(jerseyArr, jerseyList);
    fillLists(playerArr, nameList);
    fillLists(positionArr, positionList);
@@ -160,7 +212,26 @@ function styleBackground(id) {
    listOfLis.forEach(a => a.style.borderBottom = `1px solid ${color}`);
 }
 
+function removeRoster() {
+   
+   let listElements;
+
+   let nameList = document.getElementById('playerNames');
+   let positionList = document.getElementById('playerPositions');
+   let jerseyList = document.getElementById('jerseyNumbers');
+
+   //removes old team li's from DOM and adds hidden class to lists
+   listElements = document.querySelectorAll('#playerNames li');
+   listElements.forEach(player => nameList.removeChild(player));
+   listElements = document.querySelectorAll('#playerPositions li');
+   listElements.forEach(position => positionList.removeChild(position));
+   listElements = document.querySelectorAll('#jerseyNumbers li');
+   listElements.forEach(number => jerseyList.removeChild(number));
+
+}
+
 function clearPage() {
+   document.querySelector('.container').classList.add('hidden')
    playerArr = [];
    positionArr = [];
    jerseyArr = [];

@@ -12,34 +12,46 @@
       <link rel="stylesheet" href="css/style.css" />
    </head>
    <body>
+      <section class="container hidden">
+         <form class="selection" action="">
+            <h4>Multiple teams found. Select a team and hit submit.</h4>
+         </form>
+         <button class="selButton" type="submit">Submit</button>
+      </section>
       <h1>Get info about your favorite NHL team</h1>
-      <input id="userTeam" type="text" name="" value="" placeholder="Enter Team Name" />
+      <input
+         id="userTeam"
+         type="text"
+         name=""
+         value=""
+         placeholder="Enter Team Name"
+      />
       <a type="button" name="button">Get Team Info</a>
-		<section class="infoContainer">
-			<h2 id="team"></h2>
-			<h3 id="conference"></h3>
-			<h3 id="division"></h3>
-			<section class="playerInfo">
-				<ul class="holderList hidden">
-					<li class="title">
-						Number
-						<ul id="jerseyNumbers"></ul>
-					</li>
-				</ul>
-				<ul class="holderList hidden">
-					<li class="title">
-						Name
-						<ul id="playerNames"></ul>
-					</li>
-				</ul>
-				<ul class="holderList hidden">
-					<li class="title">
-						Position
-						<ul class="secondList" id="playerPositions"></ul>
-					</li>
-				</ul>
-			</section>
-		</section>
+      <section class="infoContainer">
+         <h2 id="team"></h2>
+         <h3 id="conference"></h3>
+         <h3 id="division"></h3>
+         <section class="playerInfo">
+            <ul class="holderList hidden">
+               <li class="title">
+                  Number
+                  <ul id="jerseyNumbers"></ul>
+               </li>
+            </ul>
+            <ul class="holderList hidden">
+               <li class="title">
+                  Name
+                  <ul id="playerNames"></ul>
+               </li>
+            </ul>
+            <ul class="holderList hidden">
+               <li class="title">
+                  Position
+                  <ul class="secondList" id="playerPositions"></ul>
+               </li>
+            </ul>
+         </section>
+      </section>
 
       <script type="text/javascript" src="js/main.js"></script>
    </body>
