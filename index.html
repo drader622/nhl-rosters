@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="description" content="This is where your description goes" />
+      <meta name="keywords" content="one, two, three" />
+
+      <title>NHL team info finder</title>
+
+      <!-- external CSS link -->
+      <link rel="stylesheet" href="css/normalize.css" />
+      <link rel="stylesheet" href="css/style.css" />
+   </head>
+   <body>
+      <h1>Get info about your favorite NHL team</h1>
+      <input id="userTeam" type="text" name="" value="" placeholder="Enter Team Name" />
+      <a type="button" name="button">Get Team Info</a>
+		<section class="infoContainer">
+			<h2 id="team"></h2>
+			<h3 id="conference"></h3>
+			<h3 id="division"></h3>
+			<section class="playerInfo">
+				<ul class="holderList hidden">
+					<li class="title">
+						Number
+						<ul id="jerseyNumbers"></ul>
+					</li>
+				</ul>
+				<ul class="holderList hidden">
+					<li class="title">
+						Name
+						<ul id="playerNames"></ul>
+					</li>
+				</ul>
+				<ul class="holderList hidden">
+					<li class="title">
+						Position
+						<ul class="secondList" id="playerPositions"></ul>
+					</li>
+				</ul>
+			</section>
+		</section>
+
+      <script type="text/javascript" src="js/main.js"></script>
+   </body>
+</html>
