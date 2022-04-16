@@ -8,3 +8,5 @@ Accept user input of partial or full team name/mascot
 Returns list of team roster with jersey number, name, and position
 
 Styles background of list to team colors
+![image](https://user-images.githubusercontent.com/102004658/163657105-23c99259-f404-495e-9a8f-ca94ffa110c3.png)
+
