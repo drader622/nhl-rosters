@@ -4,6 +4,7 @@
       <meta charset="utf-8" />
       <meta name="description" content="This is where your description goes" />
       <meta name="keywords" content="one, two, three" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       <title>NHL team info finder</title>
 
@@ -18,35 +19,41 @@
          </form>
          <button class="selButton" type="submit">Submit</button>
       </section>
-      <h1>Get info about your favorite NHL team</h1>
-      <input
-         id="userTeam"
-         type="text"
-         name=""
-         value=""
-         placeholder="Enter Team Name"
-      />
-      <a type="button" name="button">Get Team Info</a>
+
+      <section class="main">
+         <h1>Get info about your favorite NHL team</h1>
+         <input
+            id="userTeam"
+            type="text"
+            name=""
+            value=""
+            placeholder="Enter Team Name"
+         />
+         <a type="button" name="button">Get Team Info</a>
+      </section>
+
       <section class="infoContainer">
          <h2 id="team"></h2>
          <h3 id="conference"></h3>
          <h3 id="division"></h3>
          <section class="playerInfo">
-            <ul class="holderList hidden">
+            <ul class="holderList hidden number">
                <li class="title">
-                  Number
+                  <h5>Number</h5>
                   <ul id="jerseyNumbers"></ul>
                </li>
             </ul>
+
             <ul class="holderList hidden">
                <li class="title">
-                  Name
+                  <h5>Name</h5>
                   <ul id="playerNames"></ul>
                </li>
             </ul>
-            <ul class="holderList hidden">
+
+            <ul class="holderList hidden position">
                <li class="title">
-                  Position
+                  <h5>Position</h5>
                   <ul class="secondList" id="playerPositions"></ul>
                </li>
             </ul>

@@ -3,117 +3,203 @@
 /*******************************************/
 
 /* Box Model Hack */
-*{
-  box-sizing: border-box;
+* {
+   box-sizing: border-box;
 }
 
 /******************************************
 /* LAYOUT
 /*******************************************/
 body {
-  text-align: center;
-}
-.notShown {
-  visibility: hidden;
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   align-items: center;
 }
 .container {
-  position: fixed;
-  color: white;
-  top: -2rem;
-  left: 30rem;
-  background: rgba(0, 0, 0, .8);
-  padding: .5rem;
+   position: fixed;
+   color: white;
+   background: rgba(0, 0, 0, 0.8);
+   padding: 0.5rem;
 }
-.selection {
-  font-size: 1.5rem;
-  text-align: left;
-  padding: 1rem;
+.container .selection {
+   font-size: 1.5rem;
+   text-align: left;
+   padding: 1rem;
 }
-.selButton {
-  font-size: 1.5rem;
-  display: block;
-  margin: 0 auto;
+.container .selection input {
+   font-size: rem;
+   padding: 0;
+   margin-top: 0;
 }
-.selection input {
-  font-size: rem;
-  padding: 0;
-  margin-top: 0;
+.container .selection label {
+   font-size: 1.5rem;
+   padding-left: 0.5rem;
 }
-.selection label {
-  font-size: 1.5rem;
-  padding-left: .5rem;
+.container.selButton {
+   font-size: 1.5rem;
+   display: block;
+   margin: 0 auto;
 }
-#userTeam {
-  height: 2rem;
-  width: 15rem;
+
+.main {
+   width: 100%;
 }
-h1 {
-  margin-top: 20rem;
+.main #userTeam {
+   height: 2rem;
+   width: 15rem;
+   border: 1px solid black;
+   padding-left: 0.5rem;
 }
-a {
-  color: white;
-  cursor: pointer;
-  background: blue;
-  padding: .5rem;
-  border-radius: 2rem;
-  margin: 0 1rem 0;
+.main h1 {
+   margin-top: 15rem;
 }
-a:hover {
-  color: black;
-  background: rgba(0, 0, 0, .25);
+.main a {
+   color: white;
+   cursor: pointer;
+   background: rgb(0, 0, 255);
+   padding: 0.5rem;
+   border-radius: 2rem;
+   margin: 0 1rem 0;
+}
+.main a:hover {
+   color: black;
+   background: rgb(0, 0, 255);
+   /* background: rgba(0, 0, 0, .25); */
 }
 .infoContainer {
-  /* width: 200px; */
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 2rem auto;
-
-  /* border: 1px solid black; */
+   width: 100%;
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   margin: 2rem auto;
 }
-h2 {
-  font-size: 2rem;
-  width: 100%;
+.infoContainer h2,
+.infoContainer h3 {
+   font-size: 2.2rem;
+   width: 100%;
+   padding: 0.5rem;
+   margin: 0;
 }
-h2, h3 {
-  padding: .5rem;
-  margin: 0;
+.infoContainer h3 {
+   font-size: 1.5rem;
 }
 .playerInfo {
-  max-width: 747px;
-  display: flex;
-  justify-content: center;
-  text-align: center; 
-  align-content: center;
+   /* max-width: 745px; */
+   display: flex;
+   justify-content: center;
+   text-align: center;
+   align-content: center;
 }
-.playerInfo li { 
-  list-style: none;
-  
-  padding: .25rem 0;
+.playerInfo li {
+   list-style: none;
+   text-align: left;
+   padding: 0.25rem 0;
 }
-.holderList { 
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 0;
+.holderList {
+   font-size: 1.5rem;
+   font-weight: bold;
+   padding: 0;
 }
 .holderList ul {
-  width: 185px;
-  font-size: 1.1rem;
-  font-weight: normal;
-  margin: 1rem 0;
-  padding: 0;
-  
+   font-size: 1.1rem;
+   font-weight: normal;
+   margin: 1rem 0;
+   padding: 0;
 }
-.holderList ul li {
-  border-bottom: 1px solid black;
+#playerNames li {
+   width: 185px;
+   text-align: center;
+}
+#playerPositions li {
+   width: 144px;
+   text-align: right;
+   padding-right: 1rem;
+}
+#jerseyNumbers li {
+   width: 100px;
+   padding-left: 1rem;
+}
+
+.notShown {
+   visibility: hidden;
 }
 .hidden {
-  visibility: hidden;
+   visibility: hidden;
+}
+
+h5 {
+   margin: 0;
 }
 
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+@media screen and (max-width: 415px) {
+   .container .selButton {
+      font-size: 1.8rem;
+   }
+   .main {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+   }
+   .main h1 {
+      font-size: 2rem;
+   }
+   .main #userTeam {
+      height: 3rem;
+      width: 17rem;
+      font-size: 1.75rem;
+   }
+   .main a {
+      font-size: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      margin-top: 1.5rem;
+   }
+   .playerInfo {
+      width: 100%;
+      padding: 0 0.5rem;
+   }
+   .holderList li {
+      font-size: 1rem;
+   }
+    h5 {
+      text-align: center;
+   }
+   .number h5 {
+     margin-left: 1.5rem;
+   }
+   #playerNames li {
+      width: 185px;
+      text-align: center;
+   }
+   #playerPositions {
+     width: 115px;
+   }
+   #playerPositions li {
+     width: 115px;
+      padding-right: 1.5rem;
+      margin: 0;
+   }
+   #jerseyNumbers li {
+      width: 55px;
+      padding-left: 1.5rem;
+      margin-left: 1rem;
+   }
+}
+@media screen and (max-width: 360px) {
+  #playerPositions {
+     width: 100px;
+   }
+   #playerPositions li {
+     width: 100px;
+      padding-right: 1.5rem;
+      margin: 0;
+   }
+}
